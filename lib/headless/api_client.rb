@@ -1,5 +1,5 @@
+require "headless/api_response"
 require "rest_client"
-require "json"
 
 module Headless
   class APIClient
@@ -9,20 +9,7 @@ module Headless
     end
 
     def crawl(url)
-      APIResponse.new(get("/api/crawl", :url => url))
-    end
-
-    class APIResponse < Struct.new(:response)
-
-      def content
-        parsed_response["content"]
-      end
-
-      private
-
-      def parsed_response
-        @parsed_response ||= ::JSON.parse(response)
-      end
+      ::Headless::APIResponse.new(get("/api/crawl", :url => url))
     end
 
     private
