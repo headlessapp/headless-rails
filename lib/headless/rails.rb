@@ -9,9 +9,9 @@ module Headless
 
     def respond_to_ajax_crawlers
       if params.has_key?(ESCAPED_FRAGMENT_KEY)
-        url = EscapedFragmentExtractor.call(request)
+        url = ::Headless::Rails::EscapedFragmentExtractor.call(request)
         crawled = ::Headless::APIClient.crawl(url)
-        render text: crawled.content
+        render text: crawled.content if crawled.success?
       end
     end
 
