@@ -11,7 +11,7 @@ module Headless
       def call
         url = "#{scheme}://#{host_with_port}#{path}"
         url << "?#{query_string}"      unless query_string.empty?
-        url << "##{escaped_fragment}"  unless escaped_fragment.empty?
+        url << "##{escaped_fragment}"  unless escaped_fragment.nil? || escaped_fragment.empty?
         url
       end
 
