@@ -1,5 +1,7 @@
 # Headless::Rails
 
+[![Build Status](https://travis-ci.org/headlessapp/headless-rails.png?branch=master)](https://travis-ci.org/headlessapp/headless-rails)
+
 API wrapper for the headlessapp.com service.
 
 Seamlessly integrate AJAX webcrawler support into your javascript application.
