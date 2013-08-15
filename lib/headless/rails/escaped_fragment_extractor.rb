@@ -9,16 +9,18 @@ module Headless
       end
 
       def call
-        url = "#{protocol}#{host_with_port}#{path}"
-        url << "?#{query_string}" unless query_string.empty?
-        url << "##{hash_string}"  unless hash_string.empty?
+        url = "#{scheme}://#{host_with_port}#{path}"
+        url << "?#{query_string}"      unless query_string.empty?
+        url << "##{escaped_fragment}"  unless escaped_fragment.empty?
         url
       end
 
       private
 
-      def protocol
-        request.protocol
+      # delegate to request
+
+      def scheme
+        request.scheme
       end
 
       def host_with_port
@@ -29,16 +31,18 @@ module Headless
         request.path
       end
 
-      def hash_string
-        escaped_fragment
+      def get_params
+        request.GET
       end
 
+      # extract the fragment
+
       def escaped_fragment
-        request.GET[escaped_fragment_key]
+        get_params[escaped_fragment_key]
       end
 
       def params_without_fragment
-        without = request.GET.dup
+        without = get_params.dup
         without.delete(escaped_fragment_key)
         without
       end
