@@ -9,7 +9,7 @@ RSpec.describe Headless::Rails do
     double(:controller,
       :request => request,
       :params => {},
-      :render => nil,
+      :render => nil
     )
   end
 

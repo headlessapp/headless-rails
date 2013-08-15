@@ -11,7 +11,7 @@ module Headless
       if params.has_key?(ESCAPED_FRAGMENT_KEY)
         url = ::Headless::Rails::EscapedFragmentExtractor.call(request)
         crawled = ::Headless::APIClient.crawl(url)
-        render text: crawled.content if crawled.success?
+        render :text => crawled.content if crawled.success?
       end
     end
 
