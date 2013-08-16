@@ -24,14 +24,11 @@ Or install it yourself as:
 
 ## Usage
 
-Open your ApplicationController,
+Open your production.rb,
 and add the following;
 
-    class ApplicationController < ActionController::Base
-      include Headless::Rails
-
-      before_filter :respond_to_ajax_crawlers
-    end
+  require 'headless/rails'
+  config.middleware.use Headless::Rails::Middleware
 
 That's it.
 
