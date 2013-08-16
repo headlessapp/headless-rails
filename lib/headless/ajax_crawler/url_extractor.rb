@@ -1,4 +1,5 @@
-require 'rack/utils'
+require "headless/ajax_crawler"
+require "rack/utils"
 
 module Headless
   module AjaxCrawler

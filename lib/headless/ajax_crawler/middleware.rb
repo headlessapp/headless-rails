@@ -1,3 +1,8 @@
+require "rack/request"
+require "headless/ajax_crawler/request_matcher"
+require "headless/ajax_crawler/url_extractor"
+require "headless/api_client"
+
 module Headless
   module AjaxCrawler
     class Middleware < Struct.new(:app)

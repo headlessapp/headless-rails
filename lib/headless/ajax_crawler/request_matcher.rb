@@ -1,6 +1,8 @@
+require "headless/ajax_crawler"
+
 module Headless
   module AjaxCrawler
-    class RequestMatcher< Struct.new(:request)
+    class RequestMatcher < Struct.new(:request)
 
       def self.call(request)
         new(request).match?

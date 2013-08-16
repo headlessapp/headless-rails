@@ -1,5 +1,3 @@
-require 'headless/ajax_crawler/request_matcher'
-require 'headless/ajax_crawler/url_extractor'
 require 'headless/ajax_crawler/middleware'
 
 module Headless
