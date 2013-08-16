@@ -4,6 +4,7 @@ require 'rack/test'
 RSpec.describe Headless::AjaxCrawler::Middleware do
 
   include Rack::Test::Methods
+  include ExampleResponses
 
   def app
     hello_world = lambda { |env|
@@ -13,7 +14,7 @@ RSpec.describe Headless::AjaxCrawler::Middleware do
     Headless::AjaxCrawler::Middleware.new(hello_world)
   end
 
-  let(:headless_response) { double(:headless_response, :success? => true, :content => :headless_content) }
+  let(:headless_response) { api_response }
 
   context "regular url" do
     it "renders hello world" do
@@ -26,7 +27,7 @@ RSpec.describe Headless::AjaxCrawler::Middleware do
     it "call headless and renders it" do
       expect(Headless::APIClient).to receive(:crawl).and_return(headless_response)
       get "/?_escaped_fragment_="
-      expect(last_response.body).to include("headless_content")
+      expect(last_response.body).to include("HeadlessApp")
     end
 
     context "a POST" do

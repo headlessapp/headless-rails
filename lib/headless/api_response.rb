@@ -11,6 +11,10 @@ module Headless
       parsed_response["content"]
     end
 
+    def http_status_code
+      parsed_response["http_status_code"]
+    end
+
     private
 
     def parsed_response

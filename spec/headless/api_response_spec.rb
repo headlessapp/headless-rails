@@ -9,6 +9,7 @@ RSpec.describe Headless::APIResponse do
       "url"     => "http://example.com",
       "title"   => "Title",
       "content" => "<h1>Title</h1>",
+      "http_status_code" => 200
     }
   end
 
@@ -27,6 +28,10 @@ RSpec.describe Headless::APIResponse do
 
     it "returns true for success?" do
       expect(subject.success?).to be_true
+    end
+
+    it "returns the http status code" do
+      expect(subject.http_status_code).to be(200)
     end
   end
 

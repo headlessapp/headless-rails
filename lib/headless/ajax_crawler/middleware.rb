@@ -11,10 +11,13 @@ module Headless
 
         if ::Headless::AjaxCrawler::RequestMatcher.call(request)
           url = ::Headless::AjaxCrawler::UrlExtractor.call(request)
-          crawled = ::Headless::APIClient.crawl(url)
+          api_response = ::Headless::APIClient.crawl(url)
 
-          if crawled.success?
-            return [200, { 'Content-Type' => "text/html" }, [crawled.content]]
+          if api_response.success?
+            http_status = api_response.http_status_code || 200
+            return [http_status, { 'Content-Type' => "text/html" }, [api_response.content]]
+          else
+            raise "headless request for #{url} failed: #{crawled}"
           end
         end
 
