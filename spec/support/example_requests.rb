@@ -1,6 +1,6 @@
 module ExampleRequests
 
-  def request_env_for_uri(uri)
+  def request_env_for_uri(uri, http_verb="GET")
     path, query = uri.split("?")
 
     {
@@ -18,7 +18,7 @@ module ExampleRequests
       "REMOTE_ADDR" => "127.0.0.1",
 
       # http method
-      "REQUEST_METHOD" => "GET",
+      "REQUEST_METHOD" => http_verb,
 
       # protocol
       "SERVER_PROTOCOL" => "HTTP/1.1",
@@ -39,6 +39,10 @@ module ExampleRequests
 
   def request_for_uri(uri)
     ::Rack::Request.new(request_env_for_uri(uri))
+  end
+
+  def post_request_for_uri(uri)
+    ::Rack::Request.new(request_env_for_uri(uri, "POST"))
   end
 
 end
