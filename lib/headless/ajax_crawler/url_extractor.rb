@@ -1,8 +1,8 @@
 require 'rack/utils'
 
 module Headless
-  module Rails
-    class EscapedFragmentExtractor < Struct.new(:request)
+  module AjaxCrawler
+    class UrlExtractor < Struct.new(:request)
 
       def self.call(request)
         new(request).call
@@ -48,7 +48,7 @@ module Headless
       end
 
       def escaped_fragment_key
-        ::Headless::Rails::ESCAPED_FRAGMENT_KEY
+        ::Headless::AjaxCrawler::ESCAPED_FRAGMENT_KEY
       end
 
       def query_string

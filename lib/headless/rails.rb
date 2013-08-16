@@ -1,15 +1,13 @@
 require "headless/rails/version"
-require "headless/rails/escaped_fragment_extractor"
+require "headless/ajax_crawler"
 require "headless/api_client"
 
 module Headless
   module Rails
 
-    ESCAPED_FRAGMENT_KEY = "_escaped_fragment_".freeze
-
     def respond_to_ajax_crawlers
-      if params.has_key?(ESCAPED_FRAGMENT_KEY)
-        url = ::Headless::Rails::EscapedFragmentExtractor.call(request)
+      if ::Headless::AjaxCrawler::RequestMatcher.call(request)
+        url = ::Headless::AjaxCrawler::UrlExtractor.call(request)
         crawled = ::Headless::APIClient.crawl(url)
         render :text => crawled.content if crawled.success?
       end

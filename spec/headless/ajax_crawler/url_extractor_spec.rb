@@ -1,7 +1,7 @@
 require 'spec_helper'
 require 'rack/request'
 
-RSpec.describe Headless::Rails::EscapedFragmentExtractor do
+RSpec.describe Headless::AjaxCrawler::UrlExtractor do
 
   describe "call" do
 

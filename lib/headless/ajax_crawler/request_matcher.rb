@@ -21,7 +21,7 @@ module Headless
       end
 
       def escaped_fragment_key
-        ::Headless::Rails::ESCAPED_FRAGMENT_KEY
+        ::Headless::AjaxCrawler::ESCAPED_FRAGMENT_KEY
       end
 
       def get_params

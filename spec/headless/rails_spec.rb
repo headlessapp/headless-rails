@@ -13,7 +13,7 @@ RSpec.describe Headless::Rails do
     )
   end
 
-  let(:request) { double(:request) }
+  let(:request) { request_for_uri("/user/matthewrudy?foo=bar") }
   let(:headless_response) { double(:headless_response, :success? => true, :content => :headless_content) }
 
   describe "respond_to_ajax_crawlers" do
@@ -22,6 +22,9 @@ RSpec.describe Headless::Rails do
     end
 
     context "with no escaped_fragment" do
+
+      let(:request) { request_for_uri("/user/matthewrudy?foo=bar") }
+
       before do
         controller.stub(:params).and_return({})
       end
@@ -39,11 +42,11 @@ RSpec.describe Headless::Rails do
     end
 
     context "with an escaped fragment" do
-      before do
-        controller.stub(:params).and_return({"_escaped_fragment_" => "something"})
 
-        expect(Headless::Rails::EscapedFragmentExtractor).to receive(:call).with(request).and_return(:a_url)
-        expect(Headless::APIClient).to receive(:crawl).with(:a_url).and_return(headless_response)
+      let(:request) { request_for_uri("/user/matthewrudy?foo=bar&_escaped_fragment_=/show/twitter") }
+
+      before do
+        expect(Headless::APIClient).to receive(:crawl).with("http://localhost:3000/user/matthewrudy?foo=bar#/show/twitter").and_return(headless_response)
       end
 
       it "extracts the fragment, fetches content from the api, and renders its" do
