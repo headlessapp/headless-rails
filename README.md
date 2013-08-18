@@ -27,8 +27,8 @@ Or install it yourself as:
 Open your production.rb,
 and add the following;
 
-  require 'headless/rails'
-  config.middleware.use Headless::Rails::Middleware
+    require 'headless/rails'
+    config.middleware.use Headless::Rails::Middleware
 
 That's it.
 
